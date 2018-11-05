@@ -37,24 +37,24 @@ print13 coord_dh,11,msgstop,13,00001111b
 move_pointer coord_dh,17
 endm
 ;************************************************************
-;Макрос очистки экрана путем установки второго видео режима	
+;Макрос очистки экрана путем установки второго видео режима
 ;************************************************************
 CLRSCR 	macro
 mov  ah,0        ;номер функции установки режима дисплея
 mov  al,02h      ;код режима 80x25 черно-белого
 int  10h         ;очистка экрана
-endm	
+endm
 ;************************************************************
 ;Макрос перемещения указателя на координаты coord_dh,coord_dl
 ;************************************************************
 move_pointer macro coord_dh,coord_dl
 mov 	dh,coord_dh
-mov 	dl,coord_dl 
-mov     ah,02h
-int     10h
+mov 	dl,coord_dl
+mov   ah,02h
+int   10h
 endm
 ;************************************************************
-;Макрос перемещения указателя на координаты coord_dh,coord_dl 
+;Макрос перемещения указателя на координаты coord_dh,coord_dl
 ;и печати символа char цветом color
 ;************************************************************
 print_at_pointer macro coord_dh,coord_dl,color,char
@@ -64,13 +64,13 @@ push 	cx
 push 	dx
 mov 	dh,coord_dh
 mov 	dl,coord_dl
-mov     bl,color  
-mov     ah,02h
-int     10h
-mov     al,char
-mov     cx,1
-mov     ah,09h
-int     10h
+mov   bl,color
+mov   ah,02h
+int   10h
+mov   al,char
+mov   cx,1
+mov   ah,09h
+int   10h
 pop 	dx
 pop 	cx
 pop 	bx
@@ -80,12 +80,12 @@ endm
 ;макрос для вывода на экран строки через прерывание 21h
 ;************************************************************
 print21 macro
-mov 	ah,09h  
-int 	21h 
+mov 	ah,09h
+int 	21h
 endm
 ;************************************************************
 ;макрос для вывода на экран строки через функцию 13h прерывания 10h
-;координаты печати coord_dh,coord_dl 
+;координаты печати coord_dh,coord_dl
 ;адрес строки string, размер строки string_size, цвет colorb
 ;************************************************************
 print13 macro coord_dh,coord_dl,string,string_size,colorb
@@ -123,7 +123,7 @@ mov 	si,linelength		   ;длина
 mov 	al,symbol			   ;рисуемый символ
 endm
 ;************************************************************
-;макрос отрисовки логотипа МП 
+;макрос отрисовки логотипа МП
 ;************************************************************
 PRINT_LOGO_MACRO macro top_begin,left_begin
 ;M
@@ -223,5 +223,3 @@ print13 top_begin+7,left_begin+29,msgnull,1,10101010b
 print13 top_begin+8,left_begin+28,msgnull,1,10101010b
 print13 top_begin+8,left_begin+29,msgnull,1,10101010b
 endm
-
-
